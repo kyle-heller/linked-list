@@ -102,8 +102,14 @@ class LinkedList
   
   def find(value)
     #find(value) returns the index of the node containing value, or nil if not found.
-
-  end
+    (0...size).each do |i|
+      if at(i).value == value
+        return i
+      elsif i == size - 1
+        return nil
+      end
+    end
+  end 
 
   def to_s
     #to_s represent your LinkedList objects as strings, so you can print them out and preview them in the console. The format should be: ( value ) -> ( value ) -> ( value ) -> nil
