@@ -112,9 +112,16 @@ class LinkedList
   end 
 
   def to_s
-    #to_s represent your LinkedList objects as strings, so you can print them out and preview them in the console. The format should be: ( value ) -> ( value ) -> ( value ) -> nil
-
+    #to_s represent your LinkedList objects as strings, so you can print them out and preview them in the console.
+    # The format should be: ( value ) -> ( value ) -> ( value ) -> nil
+    (0...size).each do |i|
+      print "( #{at(i).value} ) -> "
+      if at(i).next == nil
+        print "nil\n"
+      end
+    end
   end
+    
 
 end
 
