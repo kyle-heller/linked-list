@@ -1,6 +1,5 @@
 
 # LinkedList class, which will represent the full list.
-
 class LinkedList
   attr_accessor :head, :tail
 
@@ -14,9 +13,11 @@ class LinkedList
     n = Node.new(value) 
     puts n
     if @head == nil
+      n.value = value
       @head = n
       @tail = n
     else
+      n.value = value
       @tail.next = n
       @tail = n
     end
@@ -27,9 +28,11 @@ class LinkedList
     n = Node.new(value) 
     puts n
     if @head == nil
+      n.value = value
       @head = n
       @tail = n
     else
+      n.value = value
       prev = @head
       @head = n
       n.next = prev
@@ -86,11 +89,17 @@ class LinkedList
     end
   end
 
-  def contains?(value)
-    #contains?(value) returns true if the passed in value is in the list and otherwise returns false.
-
-  end
-
+  def contains?(value) 
+    # contains?(value) returns true if the passed in value is in the list and otherwise returns false.
+    (0...size).each do |i|
+      if at(i).value == value
+        return true
+      elsif i == size - 1
+        return false
+      end
+    end
+  end 
+  
   def find(value)
     #find(value) returns the index of the node containing value, or nil if not found.
 
@@ -121,7 +130,7 @@ list.append(4)
 list.prepend(2)
 list.prepend(1)
 
-list.pop
+list.contains?(9)
 
 
 # ObjectSpace.each_object(Node){|v| p v}
@@ -132,3 +141,4 @@ list.pop
 #insert_at(value, index) that inserts a new node with the provided value at the given index.
 #remove_at(index) that removes the node at the given index.
 # Extra Credit Tip: When you insert or remove a node, consider how it will affect the existing nodes. Some of the nodes will need their #next_node link updated.
+
