@@ -7,7 +7,7 @@ class LinkedList
     @tail = nil
   end
 
-  def append(value)
+  def append(value) #adds a new node containing value to the end of the list
     n = Node.new(value) 
     puts n
     if @head == nil
@@ -21,7 +21,7 @@ class LinkedList
     end
   end
 
-  def prepend(value)
+  def prepend(value) #adds a new node containing value to the start of the list
     n = Node.new(value) 
     puts n
     if @head == nil
@@ -36,7 +36,7 @@ class LinkedList
     end
   end
 
-  def size(next_node = @head, count = 0)
+  def size(next_node = @head, count = 0) #returns the total number of nodes in the list
     if next_node == nil
       return count
     else
@@ -46,15 +46,15 @@ class LinkedList
   end
 
 
-  def head
+  def head #returns the first node in the list
     @head
   end
 
-  def tail
+  def tail #returns the last node in the list
     @tail
   end
 
-  def at(index, curr = 0, next_node = @head)
+  def at(index, curr = 0, next_node = @head) #returns the node at the given index
     if index == curr
       return next_node
     else
@@ -63,7 +63,7 @@ class LinkedList
     end
   end
 
-  def pop
+  def pop #removes the last element from the list
     if @head == nil
     else
       if size == 1 
@@ -81,7 +81,7 @@ class LinkedList
     end
   end
 
-  def contains?(value) 
+  def contains?(value) #returns true if the passed in value is in the list and otherwise returns false.
     (0...size).each do |i|
       if at(i).value == value
         return true
@@ -91,7 +91,7 @@ class LinkedList
     end
   end 
   
-  def find(value)
+  def find(value) #returns the index of the node containing value, or nil if not found.
     (0...size).each do |i|
       if at(i).value == value
         return i
@@ -101,9 +101,8 @@ class LinkedList
     end
   end 
 
-  #insert_at(value, index) that inserts a new node with the provided value at the given index.
 
-  def insert_at(value, index)
+  def insert_at(value, index) #inserts a new node with the provided value at the given index.
     n = Node.new(value)
     n.value = value 
     toright = at(index)
@@ -118,7 +117,7 @@ class LinkedList
     end
   end
 
-  def remove_at(index)
+  def remove_at(index) #that removes the node at the given index.
     toright = at(index + 1)
     if (index - 1) >= 0
       toleft = at(index - 1)     
@@ -163,13 +162,3 @@ list.prepend(1)
 list.remove_at(4)
 
 puts list
-
-
-
-
-
-# Extra Credit
-#insert_at(value, index) that inserts a new node with the provided value at the given index.
-#remove_at(index) that removes the node at the given index.
-# Extra Credit Tip: When you insert or remove a node, consider how it will affect the existing nodes. Some of the nodes will need their #next_node link updated.
-
