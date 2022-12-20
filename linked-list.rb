@@ -1,5 +1,4 @@
-
-# LinkedList class, which will represent the full list.
+require 'pry-byebug'
 class LinkedList
   attr_accessor :head, :tail
 
@@ -9,7 +8,6 @@ class LinkedList
   end
 
   def append(value)
-    #append(value) adds a new node containing value to the end of the list
     n = Node.new(value) 
     puts n
     if @head == nil
@@ -24,7 +22,6 @@ class LinkedList
   end
 
   def prepend(value)
-    #prepend(value) adds a new node containing value to the start of the list
     n = Node.new(value) 
     puts n
     if @head == nil
@@ -40,7 +37,6 @@ class LinkedList
   end
 
   def size(next_node = @head, count = 0)
-    #size returns the total number of nodes in the list
     if next_node == nil
       return count
     else
@@ -51,17 +47,14 @@ class LinkedList
 
 
   def head
-    #head returns the first node in the list
     @head
   end
 
   def tail
-    #tail returns the last node in the list
     @tail
   end
 
   def at(index, curr = 0, next_node = @head)
-    #at(index) returns the node at the given index
     if index == curr
       return next_node
     else
@@ -71,7 +64,6 @@ class LinkedList
   end
 
   def pop
-    #pop removes the last element from the list
     if @head == nil
     else
       if size == 1 
@@ -90,7 +82,6 @@ class LinkedList
   end
 
   def contains?(value) 
-    # contains?(value) returns true if the passed in value is in the list and otherwise returns false.
     (0...size).each do |i|
       if at(i).value == value
         return true
@@ -101,7 +92,6 @@ class LinkedList
   end 
   
   def find(value)
-    #find(value) returns the index of the node containing value, or nil if not found.
     (0...size).each do |i|
       if at(i).value == value
         return i
@@ -111,9 +101,37 @@ class LinkedList
     end
   end 
 
+  #insert_at(value, index) that inserts a new node with the provided value at the given index.
+
+  def insert_at(value, index)
+    n = Node.new(value)
+    n.value = value 
+    toright = at(index)
+    n.next = toright
+    if (index - 1) >= 0
+      toleft = at(index - 1)
+      toleft.next = n
+    else @head = n
+    end
+    if (index == (size - 1))
+      @tail = n
+    end
+  end
+
+  def remove_at(index)
+    toright = at(index + 1)
+    if (index - 1) >= 0
+      toleft = at(index - 1)     
+      toleft.next = toright
+    else @head = toright
+    end
+    if (index == (size - 1))
+      @tail = toleft
+    end
+  end
+
+
   def to_s
-    #to_s represent your LinkedList objects as strings, so you can print them out and preview them in the console.
-    # The format should be: ( value ) -> ( value ) -> ( value ) -> nil
     (0...size).each do |i|
       print "( #{at(i).value} ) -> "
       if at(i).next == nil
@@ -126,7 +144,6 @@ class LinkedList
 end
 
 
-# Node class, containing a #value method and a link to the #next_node, set both as nil by default.
 class Node
   attr_accessor :value, :next
 
@@ -143,10 +160,11 @@ list.append(4)
 list.prepend(2)
 list.prepend(1)
 
-list.contains?(9)
+list.remove_at(4)
+
+puts list
 
 
-# ObjectSpace.each_object(Node){|v| p v}
 
 
 
